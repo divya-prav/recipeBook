@@ -70,7 +70,7 @@ export default function AddRecipe() {
   };
 
   return (
-    <div>
+    <div className="mx-[25%]">
       <h2 className="font-bold underline text-xl pb-[20px]">Add your Recipe</h2>
       <form className="flex flex-col space-y-[20px]" onSubmit={handleSubmit}>
         <input

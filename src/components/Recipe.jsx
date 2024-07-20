@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 
-export default function Recipe() {
+export default function Recipe(props) {
   const [recipe, setRecipe] = useState(null);
+  let getRecipe = props.activeRecipe;
+  console.log(getRecipe)
 
   useEffect(() => {
     async function fetchData() {
@@ -22,28 +24,28 @@ export default function Recipe() {
       {recipe && (
         <>
           <div>
-            {recipe[0].recipe_image && 
+            {recipe[getRecipe].recipe_image && 
             <img
-              src={`http://localhost:8000/${recipe[0].recipe_image}`}
+              src={`http://localhost:8000/${recipe[getRecipe].recipe_image}`}
               alt="Omelette-image"
               className="w-[800px] h-[400px] p-2"
             />}
           </div>
           <hr className="my-5" />
           <div>
-            <h2 className="font-bold underline p-3">{recipe[0].recipe_name}</h2>
-            <p className="px-5">{recipe[0].recipe_description}</p>
+            <h2 className="font-bold underline p-3">{recipe[getRecipe].recipe_name}</h2>
+            <p className="px-5">{recipe[getRecipe].recipe_description}</p>
           </div>
           <hr className="my-5" />
           <div>
             <h4 className="font-bold underline p-3">Preparation time</h4>
-            <p className="px-5">{recipe[0].preparation_time}</p>
+            <p className="px-5">{recipe[getRecipe].preparation_time}</p>
           </div>
           <hr className="my-5" />
           <div>
             <h3 className="font-bold underline p-3">Ingredients</h3>
             <ul className="px-10 list-disc leading-loose">
-              {recipe[0].ingredients.map((item, index) => (
+              {recipe[getRecipe].ingredients && recipe[getRecipe].ingredients.map((item, index) => (
                 <li key={index}>{item}</li>
               ))}
             </ul>
@@ -52,7 +54,7 @@ export default function Recipe() {
           <div>
             <h2 className="font-bold underline p-3"> Instructions</h2>
             <ol className="px-10 list-decimal leading-loose">
-              {recipe[0].instruction.map((item, index) => (
+              {recipe[getRecipe].instruction && recipe[getRecipe].instruction.map((item, index) => (
                 <li key={index}>{item}</li>
               ))}
             </ol>

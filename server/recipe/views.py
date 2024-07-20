@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
 from .models import Recipes
 from .serializers import RecipesSerializer
+from rest_framework import status
 # Create your views here.
 
 @api_view(['GET','POST'])
@@ -23,3 +24,18 @@ def recipes(request):
             return Response(serializer.data)
         print(serializer.errors) 
         return Response(serializer.errors)
+    
+@api_view(['GET', 'DELETE'])
+def recipe_detail(request, pk):  
+    try:
+        recipe = Recipes.objects.get(pk=pk)
+    except Recipes.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = RecipesSerializer(recipe)
+        return Response(serializer.data)
+
+    elif request.method == 'DELETE':
+        recipe.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

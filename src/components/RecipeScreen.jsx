@@ -14,7 +14,7 @@ export default function RecipeScreen() {
   }
 
   function rightCLickHandler(){
-    if(activeRecipe) setActiveRecipe(activeRecipe + 1);
+    setActiveRecipe(activeRecipe + 1);
     console.log(activeRecipe);
   }
    
@@ -27,7 +27,7 @@ export default function RecipeScreen() {
         <ArrowLeftCircleIcon className="flex-none size-20  text-black-500" />
       </button>
       <div className="flex-1 mx-[10%]">
-        <Recipe />
+        <Recipe setActiveRecipe={setActiveRecipe} activeRecipe={activeRecipe}/>
       </div>
       <button
         className="flex-none justify-center  hover:text-blue-700"
